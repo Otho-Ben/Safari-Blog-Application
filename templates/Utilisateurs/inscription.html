@@ -1,0 +1,20 @@
+{% extends 'partials/base.html' %}
+{% block title %}Inscription |{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="containers"> <!-- un contenaire pour placer d'autres choses dedans tel une carde ou un paragraphe etc...-->
+        <div class="row mt-5 pt-3">
+            <div class="col-md-5 offset-md-6">
+                <div class="card shadow my-3">
+                    <div class="card-body">
+                        <h3>Page d'Inscription</h3><hr>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input class="btn  btn-dark btn-block" type="submit" value="S'inscrire">
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}

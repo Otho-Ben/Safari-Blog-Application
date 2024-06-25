@@ -1,0 +1,40 @@
+{% extends 'partials/base.html' %}
+{% block title %}Acceuil |{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="containers"> <!-- un contenaire pour placer d'autres choses dedans tel une carde ou un paragraphe etc...-->
+        <div class="row mt-5 pt-3">
+            <div class="col-md-5 offset-md-1">
+                <div class="card shadow my-3">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input class="btn  btn-dark btn-block" type="submit" value="Publier">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {% for P in poste %} <!-- Une boucle pour répeter le processus-->
+                <div class="card shadow my-3"> <!-- effet d'ombre, l'arrière plan du contenaire -->
+                                               <!-- my : pour séparer les différents postes -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="img"> <!-- L'image du l'utilisateur -->
+                            </div>
+                            <div class="col-md-7">
+                                <small>{{ P.date }}</small> <!-- date du poste -->
+                                <hr>
+                                <a class="h3" href="" style="color: grey;">{{ P.titre}}</a> <!-- lien vers plus de detail(s)-->
+                                <p class="text-justify my-3">{{ P.main }}</p> <!-- le poste-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
